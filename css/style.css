@@ -1,0 +1,554 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0; }
+
+html, body {
+  height: 100%;
+  scroll-behavior: smooth; }
+
+html {
+  font-size: 62.5%; }
+  @media screen and (max-width: 700px) {
+    html {
+      font-size: 56.25%; } }
+  @media screen and (max-width: 550px) {
+    html {
+      font-size: 50%; } }
+
+body {
+  position: relative; }
+
+h1, h2, h3, h4, h5 {
+  font-family: "Lato", sans-serif; }
+
+h1 {
+  font-size: 2.6rem; }
+
+h2 {
+  font-size: 2.4rem; }
+
+h3 {
+  font-size: 2.2rem; }
+
+p, li, a {
+  font-size: 1.8rem;
+  font-family: Georgia, 'Times New Roman', Times, serif; }
+
+ul {
+  list-style: none; }
+
+a:link, a:visited {
+  text-decoration: none;
+  color: #C8102E;
+  font-weight: 600;
+  font-size: inherit; }
+
+a:visited {
+  color: blueviolet; }
+
+a:hover, a:active {
+  color: #990c23; }
+
+a.active {
+  padding-bottom: 3px;
+  border-bottom: 1.5px solid #C8102E; }
+
+a.reference {
+  color: #C8102E;
+  padding-bottom: 1px;
+  border-bottom: 1px dotted #C8102E; }
+  a.reference:hover {
+    background-color: #C8102E;
+    color: #FEFEFE;
+    padding: 2px; }
+
+.alertbox, .alertbox-permanent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffe366;
+  color: #1e272e;
+  border: 0.5px solid #1e272e;
+  box-shadow: 0.5px 1px 1.5px rgba(30, 39, 46, 0.5);
+  width: 100%;
+  margin: 3rem auto; }
+  .alertbox p, .alertbox-permanent p {
+    font-size: 1.6rem; }
+  .alertbox .closealert, .alertbox-permanent .closealert {
+    font-weight: 600;
+    font-size: 3rem;
+    cursor: pointer; }
+
+.alertbox-permanent {
+  padding: .5rem 1rem; }
+
+.alertbox-success {
+  background-color: #046A38;
+  color: #FEFEFE; }
+
+.successbox h1 {
+  color: #046A38;
+  margin-bottom: 2rem; }
+
+.successbox p {
+  width: 60%;
+  margin-bottom: 2.5rem; }
+
+.successbox .loginlink {
+  padding: 1rem 1.5rem;
+  background-color: #3c40c6;
+  color: #FEFEFE;
+  font-size: 1.8rem;
+  font-family: "Lato", sans-serif;
+  transition: all .3s; }
+  .successbox .loginlink:hover {
+    background-color: #2f32a0; }
+
+.fieldnote {
+  color: #680303; }
+
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 20; }
+
+.navbar {
+  width: 100%;
+  min-height: 15vh;
+  padding: 3rem;
+  background-color: #3c40c6;
+  color: #FEFEFE;
+  display: flex;
+  align-items: center;
+  transition: all .3s; }
+  .navbar__logo {
+    display: flex;
+    align-items: center; }
+    .navbar__logo .shrinkimg {
+      width: 4rem;
+      height: 7rem; }
+    .navbar__logo img {
+      transition: all .3s;
+      width: 7rem;
+      height: 10vh;
+      border: 2px solid #FF8200;
+      margin-right: 1.5rem; }
+    .navbar__logo h1 {
+      font-size: 2rem; }
+  .navbar__menu {
+    margin-left: 30%;
+    display: flex; }
+    .navbar__menu li {
+      margin: 1rem; }
+      .navbar__menu li a {
+        font-family: "Lato", sans-serif;
+        color: #FFD100;
+        transition: all .3s; }
+        .navbar__menu li a:hover {
+          color: #C8102E; }
+
+.shrinknavbar, .main-navbar {
+  padding: 0;
+  min-height: 7vh;
+  box-shadow: 1px 1.5px 2px rgba(0, 0, 0, 0.5); }
+
+.main-navbar {
+  box-shadow: none; }
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  min-height: 10vh; }
+
+.wrapper {
+  width: 100%;
+  min-height: 85vh;
+  background-color: #d2dae2;
+  padding: 4rem;
+  padding-top: calc(20vh + 4rem); }
+
+.frontlogin, .register {
+  margin: 0 auto;
+  width: 60%;
+  background-color: #FEFEFE;
+  box-shadow: 0.5px 1px 2px rgba(0, 0, 0, 0.5); }
+  .frontlogin__img, .register__img {
+    object-fit: cover;
+    width: 100%;
+    height: 30rem; }
+  .frontlogin__info, .register__info {
+    padding: 3rem;
+    padding-bottom: 5rem; }
+  .frontlogin__title, .frontlogin__desc, .register__title, .register__desc {
+    text-align: center; }
+  .frontlogin__title, .register__title {
+    margin-bottom: 1.5rem; }
+  .frontlogin__desc, .register__desc {
+    margin-bottom: 2rem; }
+  .frontlogin form, .register form {
+    margin: 0 auto;
+    width: 50%; }
+    .frontlogin form .alertbox, .register form .alertbox {
+      width: 100%; }
+    .frontlogin form label, .register form label {
+      display: block;
+      font-size: 1.8rem;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      margin-bottom: .5rem; }
+      .frontlogin form label .form-icon, .register form label .form-icon {
+        color: #3c40c6;
+        margin-right: .5rem; }
+    .frontlogin form input[type=text], .frontlogin form input[type=email], .frontlogin form input[type=number], .frontlogin form input[type=password], .register form input[type=text], .register form input[type=email], .register form input[type=number], .register form input[type=password] {
+      padding: 1rem;
+      margin-bottom: 1rem;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size: 2rem;
+      width: 100%; }
+    .frontlogin form .fieldnote, .register form .fieldnote {
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem; }
+    .frontlogin form .gdpr, .register form .gdpr {
+      display: flex;
+      margin-bottom: 1.5rem; }
+      .frontlogin form .gdpr input[type=checkbox], .register form .gdpr input[type=checkbox] {
+        margin-right: 1rem; }
+      .frontlogin form .gdpr label, .register form .gdpr label {
+        font-size: 1.4rem; }
+    .frontlogin form input[type=submit], .register form input[type=submit] {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      background-color: #046A38;
+      color: #FEFEFE;
+      font-family: "Lato", sans-serif;
+      font-weight: 600;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all .3s; }
+      .frontlogin form input[type=submit]:hover, .register form input[type=submit]:hover {
+        background-color: #069b52; }
+
+.dashboard {
+  width: 20%;
+  background-color: #3c40c6;
+  margin-top: 7vh;
+  height: 100%; }
+  .dashboard__menu {
+    position: fixed;
+    width: 20%;
+    height: 100%;
+    padding: 5rem 0;
+    background-color: #3c40c6; }
+    .dashboard__menu-item {
+      font-family: "Lato", sans-serif;
+      padding: 1rem;
+      color: #FEFEFE;
+      cursor: pointer;
+      transition: all .3s;
+      width: 100%; }
+      .dashboard__menu-item:hover {
+        background-color: #FF8200;
+        color: #1e272e; }
+    .dashboard__menu .active {
+      background-color: #FF8200;
+      color: #1e272e; }
+
+.helpwrapper {
+  display: flex;
+  padding: 5rem 8rem;
+  padding-top: 20vh; }
+
+.sidebar {
+  margin-top: 10vh;
+  width: 40%; }
+  .sidebar .fixer {
+    position: fixed; }
+  .sidebar__title {
+    margin-bottom: 2rem;
+    text-align: right; }
+  .sidebar__menu {
+    margin-left: 1rem;
+    width: 100%;
+    position: relative;
+    height: 100%;
+    text-align: right; }
+    .sidebar__menu li {
+      margin-bottom: 1rem;
+      width: 100%;
+      position: relative;
+      left: -2px; }
+      .sidebar__menu li a {
+        font-weight: normal;
+        font-family: "Lato", sans-serif;
+        border-right: 2px solid rgba(221, 221, 221, 0.5);
+        padding: .5rem 1.5rem;
+        transition: all .3s; }
+        .sidebar__menu li a:hover {
+          border-right: 2px solid rgba(200, 16, 46, 0.5); }
+
+.questions {
+  margin-top: 10vh;
+  width: 50%; }
+  .questions .question {
+    width: 100%;
+    margin-bottom: 4rem; }
+    .questions .question__title {
+      background-color: #faf4f4;
+      padding: 1rem 1.5rem;
+      margin: 2rem auto;
+      border-top: 2px solid #C8102E; }
+      .questions .question__title p {
+        font-family: "Lato", sans-serif;
+        font-size: 2rem; }
+    .questions .question__text {
+      margin-bottom: 1.5rem; }
+    .questions .question ol {
+      margin-left: 2rem;
+      margin-bottom: 2rem; }
+
+.mainwrapper {
+  display: flex;
+  height: 100%; }
+
+.booking {
+  padding: 2rem;
+  padding-top: 20vh;
+  width: 80%;
+  height: 100%; }
+  @media screen and (max-width: 800px) {
+    .booking {
+      padding-left: 4rem;
+      padding-right: 4rem; } }
+  @media screen and (max-width: 630px) {
+    .booking {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem; } }
+  .booking__title {
+    margin-bottom: 3rem;
+    text-align: center; }
+
+.calendar {
+  width: 90%;
+  margin: 3rem auto;
+  background-color: #d2dae2;
+  border: .5px solid #AAA; }
+  @media screen and (max-width: 1100px) {
+    .calendar {
+      width: 90%; } }
+  @media screen and (max-width: 900px) {
+    .calendar {
+      width: 100%; } }
+  .calendar__month {
+    padding: 2rem;
+    text-align: center;
+    border-bottom: 0.5px solid rgba(153, 153, 153, 0.4); }
+    .calendar__month-name {
+      font-family: "Lato", sans-serif; }
+  .calendar__weekdays {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem; }
+  .calendar__weekday {
+    padding: 2rem 0;
+    width: 12%; }
+    .calendar__weekday-sunday, .calendar__weekday-monday, .calendar__weekday-tuesday, .calendar__weekday-wednesday, .calendar__weekday-thursday, .calendar__weekday-friday, .calendar__weekday-saturday {
+      color: #C8102E;
+      font-family: "Lato", sans-serif;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      text-align: center; }
+  .calendar__weekday:not(:last-child) {
+    margin-right: 2rem; }
+  .calendar__bookingspot {
+    padding: 1rem;
+    display: flex;
+    height: 8rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #069b52;
+    box-shadow: 1px 1.5px 2px rgba(0, 0, 0, 0.5);
+    color: #FEFEFE;
+    cursor: crosshair;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    transition: all .3s; }
+    .calendar__bookingspot .time {
+      font-size: 2.2rem;
+      font-weight: bold;
+      font-family: "Lato", sans-serif; }
+    .calendar__bookingspot .price {
+      font-family: "Lato", sans-serif;
+      color: #FFD100; }
+    .calendar__bookingspot:hover {
+      background-color: #03512b; }
+  .calendar__busy {
+    background-color: #a3b4c4; }
+    .calendar__busy:hover {
+      background-color: #94a7ba; }
+    .calendar__busy .notavailable {
+      font-family: "Lato", sans-serif;
+      color: #1e272e;
+      font-size: 1.6rem;
+      font-weight: bold; }
+  .calendar__booked {
+    background-color: #FF8200; }
+    .calendar__booked .time {
+      color: #1e272e; }
+    .calendar__booked .price {
+      color: #1e272e; }
+    .calendar__booked:hover {
+      background-color: #e67500; }
+  .calendar__manual {
+    width: 75%;
+    margin: 3rem auto;
+    box-shadow: 1px 1.5px 2px rgba(0, 0, 0, 0.5);
+    padding: 1rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; }
+    .calendar__manual-available, .calendar__manual-notavailable, .calendar__manual-booked {
+      font-family: "Lato", sans-serif;
+      display: flex;
+      align-items: center; }
+    .calendar__manual-available, .calendar__manual-notavailable, .calendar__manual-booked {
+      margin-right: 2rem; }
+      .calendar__manual-available span, .calendar__manual-notavailable span, .calendar__manual-booked span {
+        display: inline-block;
+        box-shadow: 0.5px 1px 1.5px rgba(0, 0, 0, 0.5);
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-right: 1rem;
+        background-color: #069b52; }
+    .calendar__manual-notavailable span {
+      background-color: #a3b4c4; }
+    .calendar__manual-booked span {
+      background-color: #FF8200; }
+    .calendar__manual .info {
+      font-family: "Lato", sans-serif;
+      margin-top: 1.5rem; }
+      .calendar__manual .info span {
+        font-weight: bold;
+        color: #046A38;
+        cursor: pointer;
+        border-bottom: 1px dotted #046A38; }
+        .calendar__manual .info span:hover {
+          background-color: #046A38;
+          color: #FEFEFE; }
+
+.booktrip {
+  padding: 7rem;
+  padding-top: 20vh;
+  width: 80%; }
+  .booktrip__title {
+    text-align: center; }
+  .booktrip .alert {
+    padding: 1rem 3rem;
+    box-shadow: 1px 1.5px 2px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    margin: 3rem auto;
+    font-size: 1.6rem;
+    font-family: "Lato", sans-serif; }
+    .booktrip .alert span {
+      font-weight: bold;
+      border-bottom: 1px dotted #FFD100;
+      color: #FFD100;
+      cursor: pointer; }
+      .booktrip .alert span:hover {
+        background-color: #FFD100;
+        color: #1e272e; }
+  .booktrip .alert-success {
+    background-color: #069b52;
+    color: #FEFEFE; }
+  .booktrip .alert-danger {
+    background-color: #ed1e40;
+    color: #FEFEFE; }
+  .booktrip form {
+    width: 40%;
+    margin: 3rem auto; }
+    .booktrip form .title {
+      margin-bottom: 1rem;
+      color: #3c40c6; }
+    .booktrip form label {
+      font-family: "Lato", sans-serif;
+      font-weight: bold;
+      font-size: 1.6rem;
+      display: block;
+      margin-bottom: .5rem; }
+    .booktrip form input[type=text], .booktrip form input[type=date], .booktrip form select#trip {
+      padding: 2px;
+      font-size: 1.8rem;
+      font-family: "Lato", sans-serif;
+      display: block;
+      width: 100%;
+      margin-bottom: 2rem; }
+      .booktrip form input[type=text]:focus, .booktrip form input[type=date]:focus, .booktrip form select#trip:focus {
+        outline: none;
+        border: 1px solid gray;
+        border-left: 2px solid #046A38; }
+    .booktrip form .pricebox {
+      box-shadow: 0.5px 1px 1.5px rgba(0, 0, 0, 0.4);
+      background-color: whitesmoke;
+      margin-bottom: 3rem;
+      padding: 2.5rem;
+      text-align: center; }
+      .booktrip form .pricebox .total {
+        font-family: "Lato", sans-serif;
+        font-weight: bold;
+        margin-bottom: 1rem; }
+      .booktrip form .pricebox .price {
+        color: #3c40c6; }
+    .booktrip form .sms {
+      display: inline-block;
+      margin-left: .5rem;
+      margin-bottom: 2rem; }
+    .booktrip form input[type=submit] {
+      background-color: #046A38;
+      cursor: pointer;
+      color: #FEFEFE;
+      display: block;
+      width: 50%;
+      margin: 0 auto;
+      border: none;
+      box-shadow: 0.5px 1.5px 2px rgba(0, 0, 0, 0.3);
+      font-family: "Lato", sans-serif;
+      font-size: 1.6rem;
+      padding: 1rem 4rem;
+      transition: all .3s; }
+      .booktrip form input[type=submit]:hover {
+        background-color: #069b52; }
+    .booktrip form .autocomplete {
+      /*the container must be positioned relative:*/
+      position: relative;
+      display: inline-block;
+      width: 100%; }
+    .booktrip form #from, .booktrip form #to {
+      background-color: #f1f1f1;
+      width: 100%; }
+    .booktrip form .autocomplete-items {
+      position: absolute;
+      border: 1px solid #d4d4d4;
+      border-bottom: none;
+      border-top: none;
+      z-index: 99;
+      font-family: "Lato", sans-serif;
+      font-size: 1.6rem;
+      /*position the autocomplete items to be the same width as the container:*/
+      top: 62%;
+      left: 0;
+      right: 0; }
+    .booktrip form .autocomplete-items div {
+      padding: 10px;
+      cursor: pointer;
+      background-color: #fff;
+      border-bottom: 1px solid #d4d4d4; }
+    .booktrip form .autocomplete-items div:hover {
+      /*when hovering an item:*/
+      background-color: #e9e9e9; }
+    .booktrip form .autocomplete-active {
+      /*when navigating through the items using the arrow keys:*/
+      background-color: DodgerBlue !important;
+      color: #ffffff; }

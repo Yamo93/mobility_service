@@ -1,0 +1,33 @@
+.dashboard {
+    width: 20%;
+    background-color: $blue;
+    margin-top: 7vh;
+    height: 100%;
+
+    &__menu {
+        position: fixed;
+        width: 20%;
+        height: 100%;
+        padding: 5rem 0;
+        background-color: $blue;
+
+        &-item {
+            font-family: $primary-font;
+            padding: 1rem;
+            color: $white;
+            cursor: pointer;
+            transition: all .3s;
+            width: 100%;
+
+            &:hover {
+                background-color: $orange;
+                color: $black;
+            }
+        }
+
+        .active {
+            background-color: $orange;
+            color: $black;
+        }
+    }
+}

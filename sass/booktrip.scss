@@ -1,0 +1,157 @@
+.booktrip {
+    padding: 7rem;
+    padding-top: 20vh;
+    width: 80%;
+
+    &__title {
+        text-align: center;
+    }
+
+    .alert {
+        padding: 1rem 3rem;
+        box-shadow: 1px 1.5px 2px rgba(0, 0, 0, .4);
+        width: 100%;
+        margin: 3rem auto;
+        font-size: 1.6rem;
+        font-family: $primary-font;
+
+        span {
+            font-weight: bold;
+            border-bottom: 1px dotted $yellow;
+            color: $yellow;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $yellow;
+                color: $black;
+            }
+        }
+    }
+
+    .alert-success {
+        background-color: lighten($malmogreen, 10%);
+        color: $white;
+    }
+
+    .alert-danger {
+        background-color: lighten($red, 10%);
+        color: $white;
+    }
+    
+    form {
+        width: 40%;
+        margin: 3rem auto;
+
+        .title {
+            margin-bottom: 1rem;
+            color: $blue;
+        }
+
+        label {
+            font-family: $primary-font;
+            font-weight: bold;
+            font-size: 1.6rem;
+            display: block;
+            margin-bottom: .5rem;
+        }
+
+        input[type=text], input[type=date], select#trip {
+            padding: 2px;
+            font-size: 1.8rem;
+            font-family: $primary-font;
+            display: block;
+            width: 100%;
+            margin-bottom: 2rem;
+
+            &:focus {
+                outline: none;
+                border: 1px solid gray;
+                border-left: 2px solid $malmogreen;
+            }
+        }
+
+        .pricebox {
+            box-shadow: .5px 1px 1.5px rgba(0, 0, 0, .4);
+            background-color: whitesmoke;
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            text-align: center;
+
+            .total {
+                font-family: $primary-font;
+                font-weight: bold;
+                margin-bottom: 1rem;
+            }
+
+            .price {
+                color: $blue;
+            }
+        }
+
+        .sms {
+            display: inline-block;
+            margin-left: .5rem;
+            margin-bottom: 2rem;
+        }
+
+        input[type=submit] {
+            background-color: $malmogreen;
+            cursor :pointer;
+            color: $white;
+            display: block;
+            width: 50%;
+            margin: 0 auto;
+            border: none;
+            box-shadow: .5px 1.5px 2px rgba(0, 0, 0, .3);
+            font-family: $primary-font;
+            font-size: 1.6rem;
+            padding: 1rem 4rem;
+            transition: all .3s;
+
+            &:hover {
+                background-color: lighten($malmogreen, 10%);
+            }
+        }
+
+        .autocomplete {
+            /*the container must be positioned relative:*/
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        #from, #to {
+        background-color: #f1f1f1;
+        width: 100%;
+        }
+
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            font-family: $primary-font;
+            font-size: 1.6rem;
+            /*position the autocomplete items to be the same width as the container:*/
+            top: 62%;
+            left: 0;
+            right: 0;
+        }
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff; 
+            border-bottom: 1px solid #d4d4d4; 
+        }
+        .autocomplete-items div:hover {
+        /*when hovering an item:*/
+        background-color: #e9e9e9; 
+        }
+        .autocomplete-active {
+        /*when navigating through the items using the arrow keys:*/
+        background-color: DodgerBlue !important; 
+        color: #ffffff; 
+        }
+    }
+}
