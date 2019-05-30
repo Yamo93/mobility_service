@@ -216,6 +216,7 @@
         </section>
 
         <section class="trips">
+            <h1 class="trips__title">Dina bokade resor</h1>
             <?php $result = $trip->getTripsFromUser($_SESSION['id']);
             if($result) { print_r($result);
             ?>
