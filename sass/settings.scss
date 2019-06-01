@@ -1,0 +1,18 @@
+.settings {
+    padding: 2rem;
+    padding-top: 20vh;
+    width: 50%;
+    margin: 0 auto;
+    height: 100%;
+
+    @include mediaquery(630px) {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    &__title {
+        margin-top: 5rem;
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+}

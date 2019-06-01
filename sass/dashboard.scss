@@ -29,5 +29,63 @@
             background-color: $orange;
             color: $black;
         }
+
+        .switchtheme {
+            cursor: pointer;
+            display: block;
+            border: none;
+            width: 65%;
+            margin: 3rem auto;
+            box-shadow: .5px 1px 1px rgba(0, 0, 0, .4);
+            border: .5px solid transparent;
+            padding: 1rem 2.5rem;
+            background-color: $black;
+            color: $white;
+            font-size: 1.6rem;
+            font-family: $primary-font;
+            transition: all .3s;
+
+            &:focus {
+                outline: none;
+            }
+
+            &:hover {
+                transform: translateY(-2px);
+                border: .5px solid $black;
+                color: $black;
+                background-color: $white;
+            }
+
+            &:active {
+                transform: translateY(3px);
+            }
+        }
+
+        .lighttheme {
+            background-color: $white;
+            color: $black;
+
+            &:hover {
+                background-color: $black;
+                color: $white;
+            }
+        }
+
+        .switchfont label, .switchfontsize {
+            width: 65%;
+            margin: 0 auto;
+            margin-bottom: .5rem;
+            display: block;
+            padding: 5px;
+            font-family: $primary-font;
+        }
+
+        .switchfont label {
+            color: $white;
+            font-size: 1.6rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        
     }
 }

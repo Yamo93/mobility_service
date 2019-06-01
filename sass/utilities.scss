@@ -76,3 +76,34 @@ a.reference {
 .fieldnote {
     color: rgb(104, 3, 3);
 }
+
+.alert {
+    padding: 1rem 3rem;
+    box-shadow: 1px 1.5px 2px rgba(0, 0, 0, .4);
+    width: 80%;
+    margin: 3rem auto;
+    font-size: 1.6rem;
+    font-family: $primary-font;
+
+    span {
+        font-weight: bold;
+        border-bottom: 1px dotted $yellow;
+        color: $yellow;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $yellow;
+            color: $black;
+        }
+    }
+}
+
+.alert-success {
+    background-color: lighten($malmogreen, 10%);
+    color: $white;
+}
+
+.alert-danger {
+    background-color: lighten($red, 10%);
+    color: $white;
+}

@@ -30,8 +30,9 @@ if (document.querySelector('.calendar__month-name')) {
     document.querySelector('.calendar__month-name').textContent = currentMonth + ' ' + new Date().getFullYear();
 }
 
-// Rendering different pages
-let currentPage = 'booktrip';
+// Variables
+let currentPage = 'yourtrips';
+let currentTheme = 'light';
 
 if (document.querySelector('.dashboard')) {
     switch (currentPage) {
@@ -107,6 +108,7 @@ function showOneSection(sectionClass) {
 // Skapar autocomplete för fälten
 let destinations = ['Gustav Adolfs torg', 'Malmö central', 'Bulltofta', 'Caroli city', 'Celsiusgatan', 'Dammfri', 'Söderkulla', 'Rosengård centrum', 'Triangeln', 'Värnhem', 'Almtorget', 'Annelund', 'Barkgatan', 'Bellevueparken', 'Bellevuegården', 'Bennets väg', 'Cypressvägen', 'Dalaplan', 'Davidshall', 'Djäknegatan', 'Emilstorp', 'Eriksfält', 'Erikslust', 'Falsterboplan', 'Fosie kyrka', 'Gullvik', 'Hammargatan', 'Hermodsdal', 'Holma', 'Husiegård', 'Hyllie station', 'Industrigatan', 'Jägersro', 'Kastanjegården', 'Kirsebergs torg', 'Kroksbäck', 'Lindängen', 'Lindeborgsgatan', 'Folkets park', 'Mobilia', 'Möllevångstorget', 'Nydala', 'Norra Vallgatan', 'Persborgstorget', 'Per Albins hem', 'Professorsgatan', 'Ramels väg', 'Ribersborg', 'Segevång', 'S:t Pauli kyrka', 'Sevedsgården', 'Sofielund', 'Snödroppsgatan', 'Sibbarp', 'Terminalgatan', 'Tekniska museet', 'Turning Torso', 'Ulricedal', 'Ubåtshallen', 'Vandrarhemmet', 'Vattenverket', 'Videdal', 'Ystadsgatan', 'Ärtholmsvägen', 'Åkvagnsgatan', 'Ögårdsparken', 'Öresundsparken', 'Östervärn', 'Södervärn'];
 
+
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -135,6 +137,16 @@ function autocomplete(inp, arr) {
             b.innerHTML += arr[i].substr(val.length);
             /*insert a input field that will hold the current array item's value:*/
             b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+
+            // Gör autocompleteflikarna mörka
+            if (currentTheme === 'dark') {
+                b.classList.add('autocomplete-dark');
+            }
+            
+            // Gör autocompleteflikarna ljusa
+            if (currentTheme === 'light') {
+                b.classList.remove('autocomplete-dark');
+            }
             /*execute a function when someone clicks on the item value (DIV element):*/
                 b.addEventListener("click", function(e) {
                 /*insert the value for the autocomplete text field:*/
@@ -204,5 +216,111 @@ function autocomplete(inp, arr) {
   });
   }
 
-  autocomplete(document.getElementById("from"), destinations);
-  autocomplete(document.getElementById("to"), destinations);
+  if (document.querySelector('#from')) {
+      autocomplete(document.getElementById("from"), destinations);
+      autocomplete(document.getElementById("to"), destinations);
+  }
+
+
+  // Switcha mellan mörkt och ljust läge
+  if (document.querySelector('.switchtheme')) {
+    document.querySelector('.switchtheme').addEventListener('click', toggleTheme);
+
+    function toggleTheme() {
+        if (currentTheme === 'light') {
+            // Switcha variabeln
+            currentTheme = 'dark';
+
+            // Ändra knappen
+            document.querySelector('.switchtheme').textContent = 'Byt till ljust läge';
+            document.querySelector('.switchtheme').classList.add('lighttheme');
+
+            // Gör temat mörkt
+            document.body.style.backgroundColor = '#1e272e';
+            document.body.style.color = '#FEFEFE';
+    
+            // Gör titlarna orange
+            document.querySelector('.booking__title').style.color = '#FF8200';
+            document.querySelector('.booktrip__title').style.color = '#FF8200';
+            document.querySelector('.trips__title').style.color = '#FF8200';
+            document.querySelectorAll('.title').forEach(elem => {elem.style.color = '#FFD100';});
+
+            // Gör prisboxen mörk
+            document.querySelector('.pricebox').style.backgroundColor = '#444';
+            document.querySelector('.total').style.color = '#FF8200';
+            document.querySelector('.totalprice').style.color = '#FEFEFE';
+
+            // Gör manualboxen mörk
+            document.querySelector('.calendar__manual').style.backgroundColor = '#444';
+
+            // Gör tabellen mörk
+            document.querySelectorAll('th').forEach(elem => {
+                elem.style.backgroundColor = '#555';
+            });
+            document.querySelectorAll('td').forEach(elem => {
+                elem.style.backgroundColor = '#444';
+            });
+        } else if (currentTheme === 'dark') {
+            // Switcha variabeln
+            currentTheme = 'light';
+
+            // Ändra tillbaka knappen
+            document.querySelector('.switchtheme').textContent = 'Byt till mörkt läge';
+            document.querySelector('.switchtheme').classList.remove('lighttheme');
+
+            // Gör temat ljust
+            document.body.style.backgroundColor = '#FEFEFE';
+            document.body.style.color = '#1e272e';
+
+            // Gör titlarna svarta
+            document.querySelector('.booking__title').style.color = '#1e272e';
+            document.querySelector('.booktrip__title').style.color = '#1e272e';
+            document.querySelector('.trips__title').style.color = '#1e272e';
+            document.querySelectorAll('.title').forEach(elem => {elem.style.color = '#3c40c6';});
+
+            // Gör prisboxen mörk
+            document.querySelector('.pricebox').style.backgroundColor = 'whitesmoke';
+            document.querySelector('.total').style.color = '#1e272e';
+            document.querySelector('.totalprice').style.color = '#3c40c6';
+
+            // Gör manualboxen ljus
+            document.querySelector('.calendar__manual').style.backgroundColor = '#FEFEFE';
+
+            // Gör tabellen mörk
+            document.querySelectorAll('th').forEach(elem => {
+                elem.style.backgroundColor = '#d2dae2';
+            });
+            document.querySelectorAll('td').forEach(elem => {
+                elem.style.backgroundColor = 'whitesmoke';
+            });
+        }
+
+        
+    }
+
+  }
+
+// Möjliggör ändring av textstorlek
+if (document.querySelector('.dashboard')) {
+    document.querySelector('.switchfontsize').addEventListener('change', switchFontSize);
+
+    function switchFontSize() {
+        switch (document.querySelector('.switchfontsize').value) {
+            case 'small':
+                document.documentElement.classList.add('smallfontsize');
+                break;
+            case 'normal':
+                document.documentElement.classList.remove('smallfontsize');
+                document.documentElement.classList.remove('bigfontsize');
+                break;
+            case 'big':
+                document.documentElement.classList.remove('smallfontsize');
+                document.documentElement.classList.add('bigfontsize');
+                break;
+            default:
+                document.documentElement.classList.remove('smallfontsize');
+                document.documentElement.classList.remove('bigfontsize');
+                break;
+        }
+    }
+}

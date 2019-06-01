@@ -16,6 +16,9 @@
             $message = '<div class="alert alert-success" role="alert">
             Resan har bokats! Se dina bokningar under <span onclick="showTrips()">"Dina resor"</span> till vänster.
           </div>';
+          $tripsMessage = '<div class="alert alert-success" role="alert">
+          Resan har bokats!
+        </div>';
         } else {
             $message = '<div class="alert alert-danger" role="alert">
             Något gick fel. Vänligen försök igen.
@@ -23,20 +26,20 @@
         }
     }
 
-?>
+    if(isset($_POST['deletebtn'])) {
+        
+        if ($trip->deleteTrip($_POST['deleteid'])) {
+            $cancelMessage = '<div class="alert alert-danger" role="alert">
+            Resan har avbokats.
+          </div>';
+        } else {
+            $cancelMessage = '<div class="alert alert-danger" role="alert">
+            Något gick fel med avbokningen.
+          </div>';
+        }
+    }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Malmö stads färdtjänst</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/style.css">
-</head>
-<body>
+?>
 
     <?php include('includes/header.php'); ?>
 
@@ -46,6 +49,14 @@
                 <li class="dashboard__menu-item active calendar-link">Din kalender</li>
                 <li class="dashboard__menu-item booking-link">Boka resa</li>
                 <li class="dashboard__menu-item yourtrips-link">Dina resor</li>
+                <li><button class="switchtheme">Byt till mörkt läge</button></li>
+                <li class="switchfont">
+                <label for="switchfontsize">Ändra textstorlek</label>
+                <select class="switchfontsize" id="switchfontsize">
+                    <option value="small">Liten </option>
+                    <option value="normal" selected>Normal </option>
+                    <option value="big">Stor</option>
+                </select></li>
             </ul>
         </div>
         <section class="booking">
@@ -185,7 +196,11 @@
                     - Skicka aviseringsmeddelande SMS (checkbox)
                     - Visa priset med hjälp av JavaScript
                  -->
-                <h2 class="title">Vart vill du åka?</h2>
+                <h2 class="title">Hej, 
+                <?php
+                $userinfo = $user->getUserInfo($_SESSION['id']);
+                echo $userinfo['firstname'];
+                ?>! Vart vill du åka?</h2>
                 <label for="from">Från:</label>
                 <div class="autocomplete">
                     <input type="text" name="from" id="from" placeholder="Ange plats">
@@ -206,7 +221,7 @@
                 </select>
                 <div class="pricebox">
                     <p class="total">Totalsumma:</p>
-                    <h2 class="price">99 kr</h2>
+                    <h2 class="totalprice">99 kr</h2>
                 </div>
                 <input type="checkbox" name="sms" id="sms">
                 <label for="sms" class="sms">Jag vill få SMS om resedetaljerna.</label>
@@ -216,14 +231,50 @@
         </section>
 
         <section class="trips">
-            <h1 class="trips__title">Dina bokade resor</h1>
-            <?php $result = $trip->getTripsFromUser($_SESSION['id']);
-            if($result) { print_r($result);
+            <?php if(isset($cancelMessage)) echo $cancelMessage; 
+            if(isset($tripsMessage)) echo $tripsMessage;
             ?>
+            <h1 class="trips__title">Dina bokade resor</h1>
 
-            <?php } else { ?>
+            <table class="table">
+                <tr>
+                    <th>Start</th>
+                    <th>Destination</th>
+                    <th>Datum</th>
+                    <th>Tid</th>
+                    <th>Pris</th>
+                    <th>Avbokning</th>
+                </tr>
 
-            <?php } ?>
+                <?php $result = $trip->getTripsFromUser($_SESSION['id']);
+                    if($result && sizeof($result) > 1) { 
+                        foreach($result as $key => $value) { ?>
+                            <?php // echo $value['from_destination']; ?>
+                            <tr>
+                                <td><?= $value['from_destination']; ?></td>
+                                <td><?= $value['to_destination']; ?></td>
+                                <td><?= $value['date']; ?></td>
+                                <td><?= $value['trip']; ?></td>
+                                <td><?= $value['price'] . ' SEK'; ?></td>
+                                <td>
+                                    <form method="post">
+                                    <input type="hidden" name="deleteid" value="<?= $value['id']; ?>">
+                                    <input type="submit" value="Avboka" class="unbook" name="deletebtn">
+                                    </form>
+                                </td>
+                            </tr>
+
+                        <?php }
+                    ?>
+
+                    <?php } elseif($result && sizeof($result) === 1) { 
+                        // print_r($result);
+                        
+                    ?>
+
+                    <?php } ?>
+
+            </table>
         </section>
     </div>
 

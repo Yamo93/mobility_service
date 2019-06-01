@@ -118,6 +118,15 @@ class User {
 
         return $result['id'];
     }
+
+    function getUserInfo($user_id) {
+        $sql = "SELECT * FROM fardtjanst_users WHERE id = $user_id;";
+
+        $result = $this->db->query($sql);
+        $result = $result->fetch_assoc();
+
+        return $result;
+    }
 }
 
 ?>
