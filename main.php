@@ -21,14 +21,17 @@
         </div>';
         } else {
             $message = '<div class="alert alert-danger" role="alert">
-            Något gick fel. Vänligen försök igen.
+            Resan har redan bokats tidigare.
+          </div>';
+            $tripsMessage = '<div class="alert alert-danger" role="alert">
+            Resan har redan bokats tidigare.
           </div>';
         }
     }
 
     if(isset($_POST['deletebtn'])) {
         
-        if ($trip->deleteTrip($_POST['deleteid'])) {
+        if ($trip->deleteTrip($_POST['deleteid'], $_SESSION['id'])) {
             $cancelMessage = '<div class="alert alert-danger" role="alert">
             Resan har avbokats.
           </div>';
@@ -39,25 +42,58 @@
         }
     }
 
+    if(isset($_POST['saverecurringbtn'])) {
+        $resultArray = $trip->saveRecurringTrip($_POST['saverecurringid'], $_SESSION['id']);
+
+        $cancelMessage = '<div class="alert alert-' . $resultArray['class'] . '" role="alert">' . $resultArray['message'] . '</div>';
+    }
+
+    $recurringTrips = $trip->getRecurringTrips($_SESSION['id']);
+    $datetime = new DateTime('tomorrow');
+    $formattedDate = $datetime->format('Y-m-d');
+
+    if(isset($_POST['bookrecurringbtn'])) {
+        if($trip->bookRecurringTrip($_POST['recurring'], $_SESSION['id'], $formattedDate)) {
+            $message = '<div class="alert alert-success" role="alert">
+            Resan har bokats! Se dina bokningar under <span onclick="showTrips()">"Dina resor"</span> till vänster.
+          </div>';
+          $tripsMessage = '<div class="alert alert-success" role="alert">
+          Resan har bokats!
+        </div>';
+        } else {
+            $message = '<div class="alert alert-danger" role="alert">
+            Resan har redan bokats tidigare.
+          </div>';
+            $tripsMessage = '<div class="alert alert-danger" role="alert">
+            Resan har redan bokats tidigare.
+          </div>';
+        }
+    }
+
 ?>
 
     <?php include('includes/header.php'); ?>
 
     <div class="mainwrapper">
         <div class="dashboard">
+        <div class="fixer">
             <ul class="dashboard__menu">
                 <li class="dashboard__menu-item active calendar-link">Din kalender</li>
                 <li class="dashboard__menu-item booking-link">Boka resa</li>
                 <li class="dashboard__menu-item yourtrips-link">Dina resor</li>
-                <li><button class="switchtheme">Byt till mörkt läge</button></li>
-                <li class="switchfont">
-                <label for="switchfontsize">Ändra textstorlek</label>
-                <select class="switchfontsize" id="switchfontsize">
-                    <option value="small">Liten </option>
-                    <option value="normal" selected>Normal </option>
-                    <option value="big">Stor</option>
-                </select></li>
             </ul>
+            <div class="accessability">
+                <button class="switchtheme">Byt till mörkt läge</button>
+                <div class="switchfont">
+                    <label for="switchfontsize">Ändra textstorlek</label>
+                    <select class="switchfontsize" id="switchfontsize">
+                        <option value="small">Liten </option>
+                        <option value="normal" selected>Normal </option>
+                        <option value="big">Stor</option>
+                    </select>
+                </div>
+            </div>
+        </div>
         </div>
         <section class="booking">
             <h1 class="booking__title">Din kalender</h1>
@@ -181,7 +217,7 @@
                     <span></span>
                     Din bokade resa
                 </p>
-                <p class="info">Vänligen boka resa genom att klicka på <strong>"Boka resa"</strong> <span onclick="showBooking()">här</span> eller länken uppe i menyn till vänster.</p>
+                <p class="info">Vänligen boka resa genom att klicka på <strong>"Boka resa"</strong> <span onclick="showBooking()" class="info-link">här</span> eller länken uppe i menyn till vänster.</p>
             </div>
         </section>
 
@@ -189,18 +225,30 @@
             <h1 class="booktrip__title">Boka resa</h1>
             <?php if(isset($message)) echo $message; ?>
             <form method="post" autocomplete="off">
-                <!-- 
-                    - Från / Till (två dropdowns)
-                    - Välj resedag (dropdown)
-                    - Välj resa (dropdown)
-                    - Skicka aviseringsmeddelande SMS (checkbox)
-                    - Visa priset med hjälp av JavaScript
-                 -->
                 <h2 class="title">Hej, 
                 <?php
                 $userinfo = $user->getUserInfo($_SESSION['id']);
                 echo $userinfo['firstname'];
                 ?>! Vart vill du åka?</h2>
+                <h3 class="usertitle">Jag vill boka återkommande resa:</h3>
+                <?php if($recurringTrips) : ?>
+                <select name="recurring" id="recurring" class="recurring">
+                    <?php 
+
+                    foreach($recurringTrips as $key => $value) { ?>
+
+                <option value="<?= $value['trip_id']; ?>">
+                    <?= $value['from_destination'] . '-' . $value['to_destination'] . ', ' . $datetime->format('Y-m-d') . ', ' . $value['trip']; ?>
+                </option>
+                    <?php }
+                    ?>
+                </select>
+                <p class="note"><strong>Notera!</strong> Du kan endast boka återkommande resor en dag i förväg.</p>
+                <input type="submit" value="Boka återkommande resa" name="bookrecurringbtn" class="recurring__btn">
+                <?php else : ?>
+                <p class="recurring__msg">Inga resor har sparats som återkommande. Vänligen välj återkommande resor i <span onclick="showTrips()">"Dina resor"</span>.</p>
+                <?php endif; ?>
+                <h3 class="usertitle">Jag bokar en resa manuellt...</h3>
                 <label for="from">Från:</label>
                 <div class="autocomplete">
                     <input type="text" name="from" id="from" placeholder="Ange plats">
@@ -211,7 +259,17 @@
                 </div>
                 <h2 class="title">När vill du åka?</h2>
                 <label for="date">Datum:</label>
-                <input type="date" name="date">
+                <!-- cdn for modernizr, if you haven't included it already -->
+                <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
+                <!-- polyfiller file to detect and load polyfills -->
+                <script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
+                <script>
+                webshims.setOptions('waitReady', false);
+                webshims.setOptions('forms-ext', {types: 'date'});
+                webshims.polyfill('forms forms-ext');
+                </script>
+
+                <input type="date" name="date" id="date" placeholder="ÅÅÅÅ-MM-DD">
                 <h2 class="title">Vilken resa väljer du?</h2>
                 <label for="trip">Resa:</label>
                 <select name="trip" id="trip">
@@ -244,12 +302,12 @@
                     <th>Tid</th>
                     <th>Pris</th>
                     <th>Avbokning</th>
+                    <th>Boka återkommande</th>
                 </tr>
 
                 <?php $result = $trip->getTripsFromUser($_SESSION['id']);
-                    if($result && sizeof($result) > 1) { 
-                        foreach($result as $key => $value) { ?>
-                            <?php // echo $value['from_destination']; ?>
+                    if($result && $result['singleRow'] === false) {
+                        foreach($result['result'] as $key => $value) { ?>
                             <tr>
                                 <td><?= $value['from_destination']; ?></td>
                                 <td><?= $value['to_destination']; ?></td>
@@ -262,15 +320,38 @@
                                     <input type="submit" value="Avboka" class="unbook" name="deletebtn">
                                     </form>
                                 </td>
+                                <td>
+                                    <form method="post">
+                                    <input type="hidden" name="saverecurringid" value="<?= $value['id']; ?>">
+                                    <input type="submit" value="Spara som återkommande" class="saverecurring" name="saverecurringbtn">
+                                    </form>
+                                </td>
                             </tr>
 
                         <?php }
                     ?>
 
-                    <?php } elseif($result && sizeof($result) === 1) { 
-                        // print_r($result);
-                        
-                    ?>
+                    <?php } elseif($result && $result['singleRow'] === true) { 
+                        ?>
+                        <tr>
+                                <td><?= $result['result']['from_destination']; ?></td>
+                                <td><?= $result['result']['to_destination']; ?></td>
+                                <td><?= $result['result']['date']; ?></td>
+                                <td><?= $result['result']['trip']; ?></td>
+                                <td><?= $result['result']['price'] . ' SEK'; ?></td>
+                                <td>
+                                    <form method="post">
+                                    <input type="hidden" name="deleteid" value="<?= $result['result']['id']; ?>">
+                                    <input type="submit" value="Avboka" class="unbook" name="deletebtn">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="post">
+                                    <input type="hidden" name="saverecurringid" value="<?= $result['result']['id']; ?>">
+                                    <input type="submit" value="Spara som återkommande" class="saverecurring" name="saverecurringbtn">
+                                    </form>
+                                </td>
+                            </tr>
 
                     <?php } ?>
 

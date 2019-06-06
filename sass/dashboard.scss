@@ -4,30 +4,30 @@
     margin-top: 7vh;
     height: 100%;
 
-    &__menu {
+    @include mediaquery(850px) {
+      width: 0;
+    }
+
+    .fixer {
         position: fixed;
         width: 20%;
         height: 100%;
-        padding: 5rem 0;
-        background-color: $blue;
+        z-index: 10;
+        background-color: #273c75;
 
-        &-item {
-            font-family: $primary-font;
-            padding: 1rem;
-            color: $white;
-            cursor: pointer;
-            transition: all .3s;
-            width: 100%;
-
-            &:hover {
-                background-color: $orange;
-                color: $black;
-            }
+        @include mediaquery(850px) {
+          width: 100%;
+          height: auto;
         }
 
-        .active {
-            background-color: $orange;
-            color: $black;
+        .accessability {
+
+            @include mediaquery(850px) {
+                display: flex;
+                justify-content: space-around;
+                align-items: flex-end;
+                padding: 1rem;
+            }
         }
 
         .switchtheme {
@@ -44,6 +44,11 @@
             font-size: 1.6rem;
             font-family: $primary-font;
             transition: all .3s;
+
+            @include mediaquery(850px) {
+              margin: .5rem 0;
+              width: 40%;
+            }
 
             &:focus {
                 outline: none;
@@ -71,6 +76,10 @@
             }
         }
 
+        .switchfont {
+            width: 100%;
+        }
+
         .switchfont label, .switchfontsize {
             width: 65%;
             margin: 0 auto;
@@ -78,6 +87,10 @@
             display: block;
             padding: 5px;
             font-family: $primary-font;
+
+            @include mediaquery(850px) {
+              width: 100%;
+            }
         }
 
         .switchfont label {
@@ -85,6 +98,52 @@
             font-size: 1.6rem;
             font-weight: bold;
             text-align: center;
+        }
+    }
+
+    /*
+    * fixa .fixer först, gör den till 100% width och auto height. och sätt flex på allt (menyn, och accessability, samt själva fixern. dashboarden ska ha 0% width. sen får du formatera storleken av menyalternativen så de blir små och smidiga
+
+    
+    */
+
+    &__menu {
+        width: 100%;
+        padding: 5rem 0;
+        // z-index: 5;
+        background-color: $blue;
+
+        @include mediaquery(850px) {
+          display: flex;
+          padding: 2rem 0;
+          padding-bottom: .5rem;
+        }
+
+        @include mediaquery(650px) {
+          margin-top: 3.5rem;
+        }
+
+        &-item {
+            font-family: $primary-font;
+            padding: 1rem;
+            color: $white;
+            cursor: pointer;
+            transition: all .3s;
+            width: 100%;
+            
+            @include mediaquery(850px) {
+              text-align: center;
+            }
+
+            &:hover {
+                background-color: $orange;
+                color: $black;
+            }
+        }
+
+        .active {
+            background-color: $orange;
+            color: $black;
         }
         
     }

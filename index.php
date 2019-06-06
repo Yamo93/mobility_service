@@ -42,7 +42,7 @@
                     <input type="number" name="personnr" id="personnr" placeholder="YYYYMMDDXXXX">
                     <label for="password"><i class="fas fa-key form-icon"></i>Lösenord</label>
                     <input type="password" name="password" id="password" placeholder="Ange lösenord">
-                    <input type="submit" value="Logga in" name="loginbtn" id="name="loginbtn"">
+                    <input type="submit" value="Logga in" name="loginbtn" id="loginbtn">
                 </form>
             </div>
         </section>

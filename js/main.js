@@ -81,11 +81,16 @@ function showTrips() {
     showOneSection('.trips');
 }
 
+
 function activateOneLink(linkClass) {
     // Disactivating all dashboard links
-    document.querySelectorAll('.dashboard__menu-item').forEach(elem => {
-        elem.classList.remove('active');
-    });
+    var elements = document.querySelectorAll('.dashboard__menu-item');
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].classList.remove('active');
+    }
+    // document.querySelectorAll('.dashboard__menu-item').forEach(elem => {
+    //     elem.classList.remove('active');
+    // });
 
     // Activating calendar link
     document.querySelector(linkClass).classList.add('active');
@@ -243,7 +248,20 @@ function autocomplete(inp, arr) {
             document.querySelector('.booking__title').style.color = '#FF8200';
             document.querySelector('.booktrip__title').style.color = '#FF8200';
             document.querySelector('.trips__title').style.color = '#FF8200';
-            document.querySelectorAll('.title').forEach(elem => {elem.style.color = '#FFD100';});
+
+            // document.querySelectorAll('.title').forEach(elem => {elem.style.color = '#FFD100';});
+
+            var titleElements = document.querySelectorAll('.title');
+            for (var i = 0; i < titleElements.length; i++) {
+                titleElements[i].style.color = '#FFD100';
+            };
+
+            // document.querySelectorAll('.usertitle').forEach(elem => {elem.style.color = '#FF8200';});
+
+            var userTitleElements = document.querySelectorAll('.usertitle');
+            for (var i = 0; i < userTitleElements.length; i++) {
+                userTitleElements[i].style.color = '#FF8200';
+            };
 
             // Gör prisboxen mörk
             document.querySelector('.pricebox').style.backgroundColor = '#444';
@@ -253,13 +271,28 @@ function autocomplete(inp, arr) {
             // Gör manualboxen mörk
             document.querySelector('.calendar__manual').style.backgroundColor = '#444';
 
+            // Gör länken gul
+            document.querySelector('.info-link').classList.add('darkyellow');
+
             // Gör tabellen mörk
-            document.querySelectorAll('th').forEach(elem => {
-                elem.style.backgroundColor = '#555';
-            });
-            document.querySelectorAll('td').forEach(elem => {
-                elem.style.backgroundColor = '#444';
-            });
+            // document.querySelectorAll('th').forEach(elem => {
+            //     elem.style.backgroundColor = '#555';
+            // });
+
+            var tableHeaders = document.querySelectorAll('th');
+            for (var i = 0; i < tableHeaders.length; i++) {
+                tableHeaders[i].style.backgroundColor = '#555';
+            };
+
+            // document.querySelectorAll('td').forEach(elem => {
+            //     elem.style.backgroundColor = '#444';
+            // });
+
+            var tableDataElements = document.querySelectorAll('td');
+            for (var i = 0; i < tableDataElements.length; i++) {
+                tableDataElements[i].style.backgroundColor = '#444';
+            }
+
         } else if (currentTheme === 'dark') {
             // Switcha variabeln
             currentTheme = 'light';
@@ -276,7 +309,16 @@ function autocomplete(inp, arr) {
             document.querySelector('.booking__title').style.color = '#1e272e';
             document.querySelector('.booktrip__title').style.color = '#1e272e';
             document.querySelector('.trips__title').style.color = '#1e272e';
-            document.querySelectorAll('.title').forEach(elem => {elem.style.color = '#3c40c6';});
+            // document.querySelectorAll('.title').forEach(elem => {elem.style.color = '#3c40c6';});
+            for (var i = 0; i < titleElements.length; i++) {
+                titleElements[i].style.color = '#3c40c6';
+            }
+
+            // document.querySelectorAll('.usertitle').forEach(elem => {elem.style.color = '#046A38';});
+            for (var i = 0; i < userTitleElements.length; i++) {
+                userTitleElements[i].style.color = '#046A38';
+            };
+
 
             // Gör prisboxen mörk
             document.querySelector('.pricebox').style.backgroundColor = 'whitesmoke';
@@ -286,13 +328,24 @@ function autocomplete(inp, arr) {
             // Gör manualboxen ljus
             document.querySelector('.calendar__manual').style.backgroundColor = '#FEFEFE';
 
+            // Gör länken grön igen
+            document.querySelector('.info-link').classList.remove('darkyellow');
+
             // Gör tabellen mörk
-            document.querySelectorAll('th').forEach(elem => {
-                elem.style.backgroundColor = '#d2dae2';
-            });
-            document.querySelectorAll('td').forEach(elem => {
-                elem.style.backgroundColor = 'whitesmoke';
-            });
+            // document.querySelectorAll('th').forEach(elem => {
+            //     elem.style.backgroundColor = '#d2dae2';
+            // });
+            for (var i = 0; i < tableHeaders.length; i++) {
+                tableHeaders[i].style.backgroundColor = '#d2dae2';
+            };
+
+            // document.querySelectorAll('td').forEach(elem => {
+            //     elem.style.backgroundColor = 'whitesmoke';
+            // });
+
+            for (var i = 0; i < tableDataElements.length; i++) {
+                tableDataElements[i].style.backgroundColor = 'whitesmoke';
+            }
         }
 
         
@@ -308,19 +361,53 @@ if (document.querySelector('.dashboard')) {
         switch (document.querySelector('.switchfontsize').value) {
             case 'small':
                 document.documentElement.classList.add('smallfontsize');
+                document.querySelector('.booktrip').classList.remove('booktrip-space');
                 break;
             case 'normal':
                 document.documentElement.classList.remove('smallfontsize');
                 document.documentElement.classList.remove('bigfontsize');
+                document.querySelector('.booktrip').classList.remove('booktrip-space');
                 break;
             case 'big':
                 document.documentElement.classList.remove('smallfontsize');
                 document.documentElement.classList.add('bigfontsize');
+                document.querySelector('.booktrip').classList.add('booktrip-space');
                 break;
             default:
                 document.documentElement.classList.remove('smallfontsize');
                 document.documentElement.classList.remove('bigfontsize');
+                document.querySelector('.booktrip').classList.remove('booktrip-space');
                 break;
         }
     }
+}
+
+if (document.querySelector('.questions')) {
+    // Gör menyalternativen aktiva när användaren scrollar nerför hjälpsidan
+    window.addEventListener('scroll', activateMenuItem);
+    if (window.scrollY >= 0 && window.scrollY <= document.querySelector('.question2').offsetTop - 220) {
+        document.querySelector('.menuitem1').classList.add('activeitem');
+        document.querySelector('.menuitem2').classList.remove('activeitem');
+        document.querySelector('.menuitem3').classList.remove('activeitem');
+    }
+
+    function activateMenuItem() {
+        if (window.scrollY >= 0 && window.scrollY <= document.querySelector('.question2').offsetTop - 220) {
+            document.querySelector('.menuitem1').classList.add('activeitem');
+            document.querySelector('.menuitem2').classList.remove('activeitem');
+            document.querySelector('.menuitem3').classList.remove('activeitem');
+        }
+
+        if (window.scrollY >= document.querySelector('.question2').offsetTop - 220 && window.scrollY <= (document.querySelector('.question3').offsetTop - 250)) {
+            document.querySelector('.menuitem1').classList.remove('activeitem');
+            document.querySelector('.menuitem2').classList.add('activeitem');
+            document.querySelector('.menuitem3').classList.remove('activeitem');
+        }
+        if (window.scrollY >= (document.querySelector('.question3').offsetTop - 250)) {
+            document.querySelector('.menuitem1').classList.remove('activeitem');
+            document.querySelector('.menuitem2').classList.remove('activeitem');
+            document.querySelector('.menuitem3').classList.add('activeitem');
+        }
+    }
+
 }

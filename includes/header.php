@@ -1,6 +1,6 @@
 <?php include_once('config.php'); ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,21 +32,21 @@
                     <li><a href="logout.php">Logga ut</a></li>
                     <li><a href="<?php 
                         if ($page === 'main') {
-                            echo '#" class="active"';
+                            echo '#" class="active';
                         } else { 
                             echo 'main.php';
                         }
                     ?>">Min sida</a></li>
                     <li><a href="<?php 
                         if ($page === 'settings') {
-                            echo '#" class="active"';
+                            echo '#" class="active';
                         } else { 
                             echo 'settings.php';
                         }
                     ?>">Inställningar</a></li>
                     <li><a href="<?php 
                         if ($page === 'help') {
-                            echo '#" class="active"';
+                            echo '#" class="active';
                         } else { 
                             echo 'help.php';
                         }
@@ -56,21 +56,21 @@
                 <ul class="navbar__menu">
                     <li><a href="<?php 
                         if ($page === 'index') {
-                            echo '#" class="active"';
+                            echo '#" class="active';
                         } else { 
                             echo 'index.php';
                         }
                     ?>">Logga in</a></li>
                     <li><a href="<?php 
                         if ($page === 'register') {
-                            echo '#" class="active"';
+                            echo '#" class="active';
                         } else { 
                             echo 'register.php';
                         }
                     ?>">Skapa konto</a></li>
                     <li><a href="<?php 
                         if ($page === 'help') {
-                            echo '#" class="active"';
+                            echo '#" class="active';
                         } else { 
                             echo 'help.php';
                         }

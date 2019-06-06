@@ -2,19 +2,49 @@
     display: flex;
     padding: 5rem 8rem;
     padding-top: 20vh;
+    
+    @include mediaquery(950px) {
+        padding: 5rem 4rem;
+        padding-top: 20vh;
+    }
+    
+    @include mediaquery(800px) {
+        padding: 5rem 0rem;
+        padding-top: 20vh;
+    }
+
+    @include mediaquery(680px) {
+      flex-direction: column;
+      align-items: center;
+    }
 }
 
 .sidebar {
     margin-top: 10vh;
     width: 40%;
 
+    @include mediaquery(680px) {
+      width: 80%;
+    }
+
+    @include mediaquery(500px) {
+      width: 90%;
+    }
+
     .fixer {
         position: fixed;
+        @include mediaquery(680px) {
+          position: static;
+        }
     }
 
     &__title {
         margin-bottom: 2rem;
         text-align: right;
+
+        @include mediaquery(680px) {
+          text-align: center;
+        }
     }
 
     &__menu {
@@ -23,6 +53,12 @@
         position: relative;
         height: 100%;
         text-align: right;
+
+        @include mediaquery(680px) {
+          display: flex;
+          margin-left: 0;
+          text-align: center;
+        }
 
         li {
             margin-bottom: 1rem;
@@ -38,9 +74,25 @@
                 border-right: 2px solid rgba(#DDD, .5);
                 padding: .5rem 1.5rem;
                 transition: all .3s;
+
+                @include mediaquery(680px) {
+                  border-right: 0;
+                }
                 
                 &:hover {
                     border-right: 2px solid rgba($red, .5);
+
+                    @include mediaquery(680px) {
+                        border-right: 0;
+                    }
+                }
+            }
+
+            .activeitem {
+                border-right: 2px solid rgba($red, .5);
+
+                @include mediaquery(680px) {
+                    border-right: 0;
                 }
             }
         }
@@ -52,6 +104,14 @@
 .questions {
     margin-top: 10vh;
     width: 50%;
+
+    @include mediaquery(650px) {
+      width: 60%;
+    }
+
+    @include mediaquery(500px) {
+      width: 85%;
+    }
 
     .question {
         width: 100%;

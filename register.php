@@ -57,7 +57,7 @@
                     <input type="text" name="lastname" id="lastname" placeholder="Ange ditt efternamn">
                     <label for="email">E-postadress (*)</label>
                     <input type="email" name="email" id="email" placeholder="Ange din e-postadress">
-                    <label for="phonenumber">Telefonnummer (*)</label>
+                    <label for="phonenr">Telefonnummer (*)</label>
                     <input type="number" name="phonenr" id="phonenr" placeholder="Ange ditt telefonnummer">
                     <label for="personnr">Personnummer (*)</label>
                     <input type="number" name="personnr" id="personnr" placeholder="YYYYMMDDXXXX">

@@ -9,9 +9,29 @@
     width: 80%;
     height: 100%;
 
+    @include mediaquery(1050px) {
+      padding: .5rem;
+      padding-top: 20vh;
+    }
+
+    @include mediaquery(850px) {
+      width: 95%;
+      margin: 0 auto;
+    }
+
+    @include mediaquery(650px) {
+      width: 100%;
+    }
+
     @include mediaquery(630px) {
       padding-left: 1.5rem;
       padding-right: 1.5rem;
+      padding-top: 40vh;
+    }
+
+    @include mediaquery(450px) {
+      padding-left: 0;
+      padding-right: 0;
     }
 
     &__title {
@@ -35,6 +55,10 @@
       width: 100%;
     }
 
+    @include mediaquery(600px) {
+      min-height: 35vh;
+    }
+
     &__month {
         padding: 2rem;
         text-align: center;
@@ -49,11 +73,20 @@
         display: flex;
         justify-content: space-between;
         padding: 0 1.5rem;
+
+        @include mediaquery(450px) {
+          justify-content: center;
+          padding: 0;
+        }
     }
 
     &__weekday {
         padding: 2rem 0;
         width: 12%;
+
+        @include mediaquery(450px) {
+          width: 14%;
+        }
 
         &-sunday, &-monday, &-tuesday, &-wednesday, &-thursday, &-friday, &-saturday {
             color: $red;
@@ -66,6 +99,10 @@
 
     &__weekday:not(:last-child) {
         margin-right: 2rem;
+
+        @include mediaquery(450px) {
+          margin-right: 0;
+        }
     }
 
     &__bookingspot {
@@ -91,6 +128,10 @@
             font-size: 2.2rem;
             font-weight: bold;
             font-family: $primary-font;
+
+            @include mediaquery(450px) {
+              font-size: 1.5rem;
+            }
         }
 
         .price {
@@ -115,6 +156,10 @@
             color: $black;
             font-size: 1.6rem;
             font-weight: bold;
+
+            @include mediaquery(450px) {
+              font-size: 1.2rem;
+            }
         }
     }
 
@@ -191,6 +236,16 @@
                 &:hover {
                     background-color: $malmogreen;
                     color: $white;
+                }
+            }
+
+            .darkyellow {
+                color: $yellow;
+                border-bottom: 1px dotted $yellow;
+
+                &:hover {
+                    background-color: $yellow;
+                    color: $black;
                 }
             }
         }

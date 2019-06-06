@@ -1,3 +1,4 @@
+@charset "UTF-8";
 *, *::before, *::after {
   box-sizing: border-box;
   padding: 0;
@@ -104,13 +105,13 @@ a.reference {
 
 .successbox .loginlink {
   padding: 1rem 1.5rem;
-  background-color: #3c40c6;
+  background-color: #273c75;
   color: #FEFEFE;
   font-size: 1.8rem;
   font-family: "Lato", sans-serif;
   transition: all .3s; }
   .successbox .loginlink:hover {
-    background-color: #2f32a0; }
+    background-color: #1a284f; }
 
 .fieldnote {
   color: #680303; }
@@ -148,23 +149,35 @@ a.reference {
   width: 100%;
   min-height: 15vh;
   padding: 3rem;
-  background-color: #3c40c6;
+  background-color: #273c75;
   color: #FEFEFE;
   display: flex;
   align-items: center;
   transition: all .3s; }
+  @media screen and (max-width: 650px) {
+    .navbar {
+      flex-direction: column;
+      justify-content: center; } }
   .navbar__logo {
     display: flex;
     align-items: center; }
     .navbar__logo .shrinkimg {
       width: 4rem;
       height: 7rem; }
+      @media screen and (max-width: 650px) {
+        .navbar__logo .shrinkimg {
+          width: 2.5rem;
+          height: 4.5rem; } }
     .navbar__logo img {
       transition: all .3s;
       width: 7rem;
       height: 10vh;
-      border: 2px solid #FF8200;
+      border: 2px solid #EE5A24;
       margin-right: 1.5rem; }
+      @media screen and (max-width: 650px) {
+        .navbar__logo img {
+          width: 5rem;
+          height: 8vh; } }
     .navbar__logo a {
       color: #FEFEFE; }
     .navbar__logo h1 {
@@ -172,6 +185,12 @@ a.reference {
   .navbar__menu {
     margin-left: 30%;
     display: flex; }
+    @media screen and (max-width: 875px) {
+      .navbar__menu {
+        margin-left: 15%; } }
+    @media screen and (max-width: 650px) {
+      .navbar__menu {
+        margin-left: 0; } }
     .navbar__menu li {
       margin: 1rem; }
       .navbar__menu li a {
@@ -188,6 +207,12 @@ a.reference {
 
 .main-navbar {
   box-shadow: none; }
+  @media screen and (max-width: 900px) {
+    .main-navbar .navbar__menu {
+      margin-left: 20%; } }
+  @media screen and (max-width: 650px) {
+    .main-navbar .navbar__menu {
+      margin-left: 0; } }
 
 .sticky {
   position: fixed;
@@ -201,12 +226,25 @@ a.reference {
   background-color: #d2dae2;
   padding: 4rem;
   padding-top: calc(20vh + 4rem); }
+  @media screen and (max-width: 550px) {
+    .wrapper {
+      padding: 2rem;
+      padding-top: calc(20vh + 4rem); } }
 
 .frontlogin, .register {
   margin: 0 auto;
   width: 60%;
   background-color: #FEFEFE;
   box-shadow: 0.5px 1px 2px rgba(0, 0, 0, 0.5); }
+  @media screen and (max-width: 875px) {
+    .frontlogin, .register {
+      width: 80%; } }
+  @media screen and (max-width: 600px) {
+    .frontlogin, .register {
+      width: 90%; } }
+  @media screen and (max-width: 500px) {
+    .frontlogin, .register {
+      width: 100%; } }
   .frontlogin__img, .register__img {
     object-fit: cover;
     width: 100%;
@@ -222,7 +260,13 @@ a.reference {
     margin-bottom: 2rem; }
   .frontlogin form, .register form {
     margin: 0 auto;
-    width: 50%; }
+    width: 65%; }
+    @media screen and (max-width: 550px) {
+      .frontlogin form, .register form {
+        width: 80%; } }
+    @media screen and (max-width: 400px) {
+      .frontlogin form, .register form {
+        width: 100%; } }
     .frontlogin form .alertbox, .register form .alertbox {
       width: 100%; }
     .frontlogin form label, .register form label {
@@ -231,7 +275,7 @@ a.reference {
       font-family: Georgia, 'Times New Roman', Times, serif;
       margin-bottom: .5rem; }
       .frontlogin form label .form-icon, .register form label .form-icon {
-        color: #3c40c6;
+        color: #273c75;
         margin-right: .5rem; }
     .frontlogin form input[type=text], .frontlogin form input[type=email], .frontlogin form input[type=number], .frontlogin form input[type=password], .register form input[type=text], .register form input[type=email], .register form input[type=number], .register form input[type=password] {
       padding: 1rem;
@@ -265,29 +309,34 @@ a.reference {
 
 .dashboard {
   width: 20%;
-  background-color: #3c40c6;
+  background-color: #273c75;
   margin-top: 7vh;
-  height: 100%; }
-  .dashboard__menu {
+  height: 100%;
+  /*
+    * fixa .fixer först, gör den till 100% width och auto height. och sätt flex på allt (menyn, och accessability, samt själva fixern. dashboarden ska ha 0% width. sen får du formatera storleken av menyalternativen så de blir små och smidiga
+
+    
+    */ }
+  @media screen and (max-width: 850px) {
+    .dashboard {
+      width: 0; } }
+  .dashboard .fixer {
     position: fixed;
     width: 20%;
     height: 100%;
-    padding: 5rem 0;
-    background-color: #3c40c6; }
-    .dashboard__menu-item {
-      font-family: "Lato", sans-serif;
-      padding: 1rem;
-      color: #FEFEFE;
-      cursor: pointer;
-      transition: all .3s;
-      width: 100%; }
-      .dashboard__menu-item:hover {
-        background-color: #FF8200;
-        color: #1e272e; }
-    .dashboard__menu .active {
-      background-color: #FF8200;
-      color: #1e272e; }
-    .dashboard__menu .switchtheme {
+    z-index: 10;
+    background-color: #273c75; }
+    @media screen and (max-width: 850px) {
+      .dashboard .fixer {
+        width: 100%;
+        height: auto; } }
+    @media screen and (max-width: 850px) {
+      .dashboard .fixer .accessability {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
+        padding: 1rem; } }
+    .dashboard .fixer .switchtheme {
       cursor: pointer;
       display: block;
       border: none;
@@ -301,53 +350,119 @@ a.reference {
       font-size: 1.6rem;
       font-family: "Lato", sans-serif;
       transition: all .3s; }
-      .dashboard__menu .switchtheme:focus {
+      @media screen and (max-width: 850px) {
+        .dashboard .fixer .switchtheme {
+          margin: .5rem 0;
+          width: 40%; } }
+      .dashboard .fixer .switchtheme:focus {
         outline: none; }
-      .dashboard__menu .switchtheme:hover {
+      .dashboard .fixer .switchtheme:hover {
         transform: translateY(-2px);
         border: 0.5px solid #1e272e;
         color: #1e272e;
         background-color: #FEFEFE; }
-      .dashboard__menu .switchtheme:active {
+      .dashboard .fixer .switchtheme:active {
         transform: translateY(3px); }
-    .dashboard__menu .lighttheme {
+    .dashboard .fixer .lighttheme {
       background-color: #FEFEFE;
       color: #1e272e; }
-      .dashboard__menu .lighttheme:hover {
+      .dashboard .fixer .lighttheme:hover {
         background-color: #1e272e;
         color: #FEFEFE; }
-    .dashboard__menu .switchfont label, .dashboard__menu .switchfontsize {
+    .dashboard .fixer .switchfont {
+      width: 100%; }
+    .dashboard .fixer .switchfont label, .dashboard .fixer .switchfontsize {
       width: 65%;
       margin: 0 auto;
       margin-bottom: .5rem;
       display: block;
       padding: 5px;
       font-family: "Lato", sans-serif; }
-    .dashboard__menu .switchfont label {
+      @media screen and (max-width: 850px) {
+        .dashboard .fixer .switchfont label, .dashboard .fixer .switchfontsize {
+          width: 100%; } }
+    .dashboard .fixer .switchfont label {
       color: #FEFEFE;
       font-size: 1.6rem;
       font-weight: bold;
       text-align: center; }
+  .dashboard__menu {
+    width: 100%;
+    padding: 5rem 0;
+    background-color: #273c75; }
+    @media screen and (max-width: 850px) {
+      .dashboard__menu {
+        display: flex;
+        padding: 2rem 0;
+        padding-bottom: .5rem; } }
+    @media screen and (max-width: 650px) {
+      .dashboard__menu {
+        margin-top: 3.5rem; } }
+    .dashboard__menu-item {
+      font-family: "Lato", sans-serif;
+      padding: 1rem;
+      color: #FEFEFE;
+      cursor: pointer;
+      transition: all .3s;
+      width: 100%; }
+      @media screen and (max-width: 850px) {
+        .dashboard__menu-item {
+          text-align: center; } }
+      .dashboard__menu-item:hover {
+        background-color: #EE5A24;
+        color: #1e272e; }
+    .dashboard__menu .active {
+      background-color: #EE5A24;
+      color: #1e272e; }
 
 .helpwrapper {
   display: flex;
   padding: 5rem 8rem;
   padding-top: 20vh; }
+  @media screen and (max-width: 950px) {
+    .helpwrapper {
+      padding: 5rem 4rem;
+      padding-top: 20vh; } }
+  @media screen and (max-width: 800px) {
+    .helpwrapper {
+      padding: 5rem 0rem;
+      padding-top: 20vh; } }
+  @media screen and (max-width: 680px) {
+    .helpwrapper {
+      flex-direction: column;
+      align-items: center; } }
 
 .sidebar {
   margin-top: 10vh;
   width: 40%; }
+  @media screen and (max-width: 680px) {
+    .sidebar {
+      width: 80%; } }
+  @media screen and (max-width: 500px) {
+    .sidebar {
+      width: 90%; } }
   .sidebar .fixer {
     position: fixed; }
+    @media screen and (max-width: 680px) {
+      .sidebar .fixer {
+        position: static; } }
   .sidebar__title {
     margin-bottom: 2rem;
     text-align: right; }
+    @media screen and (max-width: 680px) {
+      .sidebar__title {
+        text-align: center; } }
   .sidebar__menu {
     margin-left: 1rem;
     width: 100%;
     position: relative;
     height: 100%;
     text-align: right; }
+    @media screen and (max-width: 680px) {
+      .sidebar__menu {
+        display: flex;
+        margin-left: 0;
+        text-align: center; } }
     .sidebar__menu li {
       margin-bottom: 1rem;
       width: 100%;
@@ -359,12 +474,29 @@ a.reference {
         border-right: 2px solid rgba(221, 221, 221, 0.5);
         padding: .5rem 1.5rem;
         transition: all .3s; }
+        @media screen and (max-width: 680px) {
+          .sidebar__menu li a {
+            border-right: 0; } }
         .sidebar__menu li a:hover {
           border-right: 2px solid rgba(200, 16, 46, 0.5); }
+          @media screen and (max-width: 680px) {
+            .sidebar__menu li a:hover {
+              border-right: 0; } }
+      .sidebar__menu li .activeitem {
+        border-right: 2px solid rgba(200, 16, 46, 0.5); }
+        @media screen and (max-width: 680px) {
+          .sidebar__menu li .activeitem {
+            border-right: 0; } }
 
 .questions {
   margin-top: 10vh;
   width: 50%; }
+  @media screen and (max-width: 650px) {
+    .questions {
+      width: 60%; } }
+  @media screen and (max-width: 500px) {
+    .questions {
+      width: 85%; } }
   .questions .question {
     width: 100%;
     margin-bottom: 4rem; }
@@ -395,10 +527,26 @@ a.reference {
   padding-top: 20vh;
   width: 80%;
   height: 100%; }
+  @media screen and (max-width: 1050px) {
+    .booking {
+      padding: .5rem;
+      padding-top: 20vh; } }
+  @media screen and (max-width: 850px) {
+    .booking {
+      width: 95%;
+      margin: 0 auto; } }
+  @media screen and (max-width: 650px) {
+    .booking {
+      width: 100%; } }
   @media screen and (max-width: 630px) {
     .booking {
       padding-left: 1.5rem;
-      padding-right: 1.5rem; } }
+      padding-right: 1.5rem;
+      padding-top: 40vh; } }
+  @media screen and (max-width: 450px) {
+    .booking {
+      padding-left: 0;
+      padding-right: 0; } }
   .booking__title {
     margin-bottom: 3rem;
     text-align: center; }
@@ -415,6 +563,9 @@ a.reference {
   @media screen and (max-width: 900px) {
     .calendar {
       width: 100%; } }
+  @media screen and (max-width: 600px) {
+    .calendar {
+      min-height: 35vh; } }
   .calendar__month {
     padding: 2rem;
     text-align: center;
@@ -425,9 +576,16 @@ a.reference {
     display: flex;
     justify-content: space-between;
     padding: 0 1.5rem; }
+    @media screen and (max-width: 450px) {
+      .calendar__weekdays {
+        justify-content: center;
+        padding: 0; } }
   .calendar__weekday {
     padding: 2rem 0;
     width: 12%; }
+    @media screen and (max-width: 450px) {
+      .calendar__weekday {
+        width: 14%; } }
     .calendar__weekday-sunday, .calendar__weekday-monday, .calendar__weekday-tuesday, .calendar__weekday-wednesday, .calendar__weekday-thursday, .calendar__weekday-friday, .calendar__weekday-saturday {
       color: #C8102E;
       font-family: "Lato", sans-serif;
@@ -436,6 +594,9 @@ a.reference {
       text-align: center; }
   .calendar__weekday:not(:last-child) {
     margin-right: 2rem; }
+    @media screen and (max-width: 450px) {
+      .calendar__weekday:not(:last-child) {
+        margin-right: 0; } }
   .calendar__bookingspot {
     padding: 1rem;
     display: flex;
@@ -454,6 +615,9 @@ a.reference {
       font-size: 2.2rem;
       font-weight: bold;
       font-family: "Lato", sans-serif; }
+      @media screen and (max-width: 450px) {
+        .calendar__bookingspot .time {
+          font-size: 1.5rem; } }
     .calendar__bookingspot .price {
       font-family: "Lato", sans-serif;
       color: #FFD100; }
@@ -468,14 +632,17 @@ a.reference {
       color: #1e272e;
       font-size: 1.6rem;
       font-weight: bold; }
+      @media screen and (max-width: 450px) {
+        .calendar__busy .notavailable {
+          font-size: 1.2rem; } }
   .calendar__booked {
-    background-color: #FF8200; }
+    background-color: #EE5A24; }
     .calendar__booked .time {
       color: #1e272e; }
     .calendar__booked .price {
       color: #1e272e; }
     .calendar__booked:hover {
-      background-color: #e67500; }
+      background-color: #e74b12; }
   .calendar__manual {
     width: 75%;
     margin: 3rem auto;
@@ -500,7 +667,7 @@ a.reference {
     .calendar__manual-notavailable span {
       background-color: #a3b4c4; }
     .calendar__manual-booked span {
-      background-color: #FF8200; }
+      background-color: #EE5A24; }
     .calendar__manual .info {
       font-family: "Lato", sans-serif;
       margin-top: 1.5rem; }
@@ -512,36 +679,81 @@ a.reference {
         .calendar__manual .info span:hover {
           background-color: #046A38;
           color: #FEFEFE; }
+      .calendar__manual .info .darkyellow {
+        color: #FFD100;
+        border-bottom: 1px dotted #FFD100; }
+        .calendar__manual .info .darkyellow:hover {
+          background-color: #FFD100;
+          color: #1e272e; }
 
 .booktrip {
   padding: 7rem;
   padding-top: 20vh;
   width: 80%; }
+  @media screen and (max-width: 850px) {
+    .booktrip {
+      padding-top: 40vh;
+      width: 100%; } }
+  @media screen and (max-width: 450px) {
+    .booktrip {
+      padding: 2rem;
+      padding-top: 20vh; } }
+  @media screen and (max-width: 400px) {
+    .booktrip {
+      padding: 2rem;
+      padding-top: 35vh; } }
   .booktrip__title {
     text-align: center; }
   .booktrip form {
-    width: 40%;
+    width: 60%;
     margin: 3rem auto; }
+    @media screen and (max-width: 850px) {
+      .booktrip form {
+        width: 100%; } }
     .booktrip form .title {
-      margin-bottom: 1rem;
-      color: #3c40c6; }
+      margin-bottom: 2rem;
+      color: #273c75; }
+    .booktrip form .usertitle {
+      font-size: 2rem;
+      color: #046A38;
+      margin-bottom: 1rem; }
+    .booktrip form .note {
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem; }
+    .booktrip form .recurring__msg {
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem; }
+      .booktrip form .recurring__msg span {
+        font-weight: normal;
+        border-bottom: 1px dotted #EE5A24;
+        color: #EE5A24;
+        cursor: pointer; }
+        .booktrip form .recurring__msg span:hover {
+          background-color: #EE5A24;
+          color: #FEFEFE; }
+    .booktrip form .recurring__btn {
+      margin-bottom: 2rem !important; }
     .booktrip form label {
       font-family: "Lato", sans-serif;
       font-weight: bold;
       font-size: 1.6rem;
       display: block;
       margin-bottom: .5rem; }
-    .booktrip form input[type=text], .booktrip form input[type=date], .booktrip form select#trip {
+    .booktrip form input[type=text], .booktrip form input[type=date], .booktrip form select#trip, .booktrip form select#recurring {
       padding: 2px;
       font-size: 1.8rem;
       font-family: "Lato", sans-serif;
       display: block;
       width: 100%;
-      margin-bottom: 2rem; }
-      .booktrip form input[type=text]:focus, .booktrip form input[type=date]:focus, .booktrip form select#trip:focus {
+      margin-bottom: .5rem; }
+      .booktrip form input[type=text]:focus, .booktrip form input[type=date]:focus, .booktrip form select#trip:focus, .booktrip form select#recurring:focus {
         outline: none;
         border: 1px solid gray;
         border-left: 2px solid #046A38; }
+    .booktrip form input[type=date] {
+      margin-bottom: 2rem; }
+    .booktrip form select#trip {
+      margin-bottom: 2rem; }
     .booktrip form .pricebox {
       box-shadow: 0.5px 1px 1.5px rgba(0, 0, 0, 0.4);
       background-color: whitesmoke;
@@ -553,7 +765,7 @@ a.reference {
         font-weight: bold;
         margin-bottom: 1rem; }
       .booktrip form .pricebox .totalprice {
-        color: #3c40c6; }
+        color: #273c75; }
     .booktrip form .sms {
       display: inline-block;
       margin-left: .5rem;
@@ -563,7 +775,7 @@ a.reference {
       cursor: pointer;
       color: #FEFEFE;
       display: block;
-      width: 50%;
+      width: auto;
       margin: 0 auto;
       border: none;
       box-shadow: 0.5px 1.5px 2px rgba(0, 0, 0, 0.3);
@@ -581,6 +793,8 @@ a.reference {
     .booktrip form #from, .booktrip form #to {
       background-color: #f1f1f1;
       width: 100%; }
+    .booktrip form #to {
+      margin-bottom: 2rem; }
     .booktrip form .autocomplete-items {
       position: absolute;
       border: 1px solid #d4d4d4;
@@ -610,11 +824,19 @@ a.reference {
       background-color: DodgerBlue !important;
       color: #ffffff; }
 
+@media screen and (max-width: 450px) {
+  .booktrip-space {
+    padding-top: 60vh; } }
+
 .trips {
   padding: 2rem;
   padding-top: 20vh;
   width: 80%;
   height: 100%; }
+  @media screen and (max-width: 850px) {
+    .trips {
+      padding-top: 40vh;
+      width: 100%; } }
   .trips__title {
     margin-bottom: 3rem;
     text-align: center; }
@@ -635,13 +857,22 @@ a.reference {
       font-family: "Lato", sans-serif;
       padding: 15px;
       text-align: center; }
+      @media screen and (max-width: 1050px) {
+        .trips .table tr th, .trips .table tr td {
+          padding: 10px; } }
+      @media screen and (max-width: 975px) {
+        .trips .table tr th, .trips .table tr td {
+          padding: 5px 2px; } }
+      @media screen and (max-width: 630px) {
+        .trips .table tr th, .trips .table tr td {
+          padding: 1px; } }
     .trips .table tr {
       transition: all .3s; }
       .trips .table tr:nth-child(odd) {
         background-color: whitesmoke; }
       .trips .table tr:hover {
         background-color: #e5e5e5; }
-    .trips .table tr td .unbook {
+    .trips .table tr td .unbook, .trips .table tr td .saverecurring {
       border: none;
       outline: none;
       padding: 2px 10px;
@@ -653,8 +884,12 @@ a.reference {
       font-weight: normal;
       font-size: 1.6rem;
       transition: all .3s; }
-      .trips .table tr td .unbook:hover {
+      .trips .table tr td .unbook:hover, .trips .table tr td .saverecurring:hover {
         background-color: #ed1e40; }
+    .trips .table tr td .saverecurring {
+      background-color: #046A38; }
+      .trips .table tr td .saverecurring:hover {
+        background-color: #069b52; }
   .trips__titles, .trips__triplist {
     display: flex;
     flex-wrap: wrap;
@@ -688,6 +923,12 @@ a.reference {
     .settings {
       padding-left: 1.5rem;
       padding-right: 1.5rem; } }
+  @media screen and (max-width: 600px) {
+    .settings {
+      width: 80%; } }
+  @media screen and (max-width: 400px) {
+    .settings {
+      width: 90%; } }
   .settings__title {
     margin-top: 5rem;
     margin-bottom: 3rem;

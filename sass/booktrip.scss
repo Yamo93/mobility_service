@@ -3,40 +3,103 @@
     padding-top: 20vh;
     width: 80%;
 
+    @include mediaquery(850px) {
+        padding-top: 40vh;
+        width: 100%;
+    }
+
+    @include mediaquery(450px) {
+        padding: 2rem;
+        padding-top: 20vh;
+    }
+
+    @include mediaquery(400px) {
+        padding: 2rem;
+        padding-top: 35vh;
+    }
+
     &__title {
         text-align: center;
     }
     
     form {
-        width: 40%;
+        width: 60%;
         margin: 3rem auto;
 
+        @include mediaquery(850px) {
+          width: 100%;
+        }
+
         .title {
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             color: $blue;
         }
 
+        .usertitle {
+            font-size: 2rem;
+            color: $malmogreen;
+            margin-bottom: 1rem;;
+        }
+
+        .note {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .recurring {
+
+            &__msg {
+                font-size: 1.6rem;
+                margin-bottom: 1.5rem;
+        
+                span {
+                    font-weight: normal;
+                    border-bottom: 1px dotted $orange;
+                    color: $orange;
+                    cursor: pointer;
+            
+                    &:hover {
+                        background-color: $orange;
+                        color: $white;
+                    }
+                }
+            }
+        
+            &__btn {
+                margin-bottom: 2rem !important;
+            }
+        }
+
         label {
-            font-family: $primary-font;
+            font-family: $primar
+            y-font;
             font-weight: bold;
             font-size: 1.6rem;
             display: block;
             margin-bottom: .5rem;
         }
 
-        input[type=text], input[type=date], select#trip {
+        input[type=text], input[type=date], select#trip, select#recurring {
             padding: 2px;
             font-size: 1.8rem;
             font-family: $primary-font;
             display: block;
             width: 100%;
-            margin-bottom: 2rem;
+            margin-bottom: .5rem;
 
             &:focus {
                 outline: none;
                 border: 1px solid gray;
                 border-left: 2px solid $malmogreen;
             }
+        }
+
+        input[type=date] {
+            margin-bottom: 2rem;
+        }
+
+        select#trip {
+            margin-bottom: 2rem;
         }
 
         .pricebox {
@@ -68,7 +131,7 @@
             cursor :pointer;
             color: $white;
             display: block;
-            width: 50%;
+            width: auto;
             margin: 0 auto;
             border: none;
             box-shadow: .5px 1.5px 2px rgba(0, 0, 0, .3);
@@ -92,6 +155,10 @@
         #from, #to {
         background-color: #f1f1f1;
         width: 100%;
+        }
+
+        #to {
+            margin-bottom: 2rem;
         }
 
         .autocomplete-items {
@@ -129,5 +196,11 @@
         background-color: DodgerBlue !important; 
         color: #ffffff; 
         }
+    }
+}
+
+.booktrip-space {
+    @include mediaquery(450px) {
+      padding-top: 60vh;
     }
 }
