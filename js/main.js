@@ -310,11 +310,13 @@ function autocomplete(inp, arr) {
             document.querySelector('.booktrip__title').style.color = '#1e272e';
             document.querySelector('.trips__title').style.color = '#1e272e';
             // document.querySelectorAll('.title').forEach(elem => {elem.style.color = '#3c40c6';});
+            var titleElements = document.querySelectorAll('.title');
             for (var i = 0; i < titleElements.length; i++) {
                 titleElements[i].style.color = '#3c40c6';
             }
 
             // document.querySelectorAll('.usertitle').forEach(elem => {elem.style.color = '#046A38';});
+            var userTitleElements = document.querySelectorAll('.usertitle');
             for (var i = 0; i < userTitleElements.length; i++) {
                 userTitleElements[i].style.color = '#046A38';
             };
@@ -335,6 +337,7 @@ function autocomplete(inp, arr) {
             // document.querySelectorAll('th').forEach(elem => {
             //     elem.style.backgroundColor = '#d2dae2';
             // });
+            var tableHeaders = document.querySelectorAll('th');
             for (var i = 0; i < tableHeaders.length; i++) {
                 tableHeaders[i].style.backgroundColor = '#d2dae2';
             };
@@ -343,6 +346,7 @@ function autocomplete(inp, arr) {
             //     elem.style.backgroundColor = 'whitesmoke';
             // });
 
+            var tableDataElements = document.querySelectorAll('td');
             for (var i = 0; i < tableDataElements.length; i++) {
                 tableDataElements[i].style.backgroundColor = 'whitesmoke';
             }
@@ -411,3 +415,110 @@ if (document.querySelector('.questions')) {
     }
 
 }
+
+// Formulärvalidering (med biblioteket just-validate)
+// new window.JustValidate('.registerform', {
+//     messages: {
+//         firstname: 'Förnamnet är obligatoriskt.',
+//         lastname: 'Efternamnet är obligatoriskt.',
+//         phonenr: 'Du måste ange telefonnummer.',
+//         personnr: {
+//             minLength: 'Personnumret får inte vara kortare än 12 tecken.',
+//             maxLength: 'Personnumret får inte vara längre än 12 tecken.',
+//             required: 'Personnumret måste anges.'
+//         },
+//         required: 'Fältet är obligatoriskt.',
+//         email: 'Vänligen ange en giltig e-postadress.',
+//         maxLength: 'Fältet får max innehålla :value tecken.',
+//         minLength: 'Fältet måste minst innehålla :value tecken.',
+//         password: {
+//             minLength: 'Lösenordet måste vara minst sju tecken långt.',
+//             maxLength: 'Lösenordet får max vara 20 tecken långt.',
+//             required: 'Du måste ange ett lösenord.'
+//         },
+//         checkbox: 'Du måste bocka i knappen.'
+//     },
+//     rules: {
+//       email: {
+//           required: true,
+//           email: true
+//       },
+//       checkbox: {
+//           required: true
+//       },
+//       firstname: {
+//           required: true,
+//           minLength: 3,
+//           maxLength: 15
+//       },
+//       lastname: {
+//           required: true,
+//           minLength: 3,
+//           maxLength: 15
+//       },
+//       password: {
+//           required: true,
+//           password: true,
+//           minLength: 7,
+//           maxLength: 20
+//       },
+//       zip: {
+//           required: true,
+//           zip: true
+//       },
+//       phonenr: {
+//           required: true
+//       },
+//       personnr: {
+//           required: true,
+//           minLength: 12,
+//           maxLength: 12
+//       }
+//   }, 
+//   colorWrong: '#C8102E'
+// });
+
+$().ready(function() {
+    // validerar registreringsformuläret
+
+    $('.registerform').validate({
+        rules: {
+            firstname: 'required',
+            lastname: 'required',
+            email: {
+                required: true,
+                email: true
+            }, 
+            phonenr: 'required',
+            personnr: {
+                required: true,
+                minlength: 12,
+                maxlength: 12,
+                number: true
+            },
+            password: {
+                required: true,
+                minlength: 7,
+                maxlength: 20
+            },
+            gdpr: 'required'
+        },
+        messages: {
+            firstname: 'Ange ditt förnamn.',
+            lastname: 'Ange ditt efternamn.',
+            email: 'Ange din e-postadress.',
+            phonenr: 'Ange ditt telefonnummer.',
+            personnr: {
+                required: 'Ange ditt personnummer.',
+                minlength: 'Personnumret måste vara tolv tecken långt.',
+                maxlength: 'Personnumret måste vara tolv tecken långt.'
+            },
+            password: {
+                required: 'Ange ditt önskade lösenord.',
+                minlength: 'Lösenordet måste vara minst sju tecken långt.',
+                maxlength: 'Lösenordet får max vara 20 tecken långt.'
+            },
+            confirm: 'Du måste bocka i knappen och godkänna policyn.'
+        }
+    })
+})

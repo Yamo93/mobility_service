@@ -29,12 +29,19 @@ class User {
 
     function registerUser($firstname, $lastname, $email, $phonenr, $personnr, $password) {
 
+        // Hanterar förnamnet
         $firstname = filter_var($firstname, FILTER_SANITIZE_STRING);
+        $firstname = strtolower($firstname);
+        $firstname = ucfirst($firstname);
+
+        // Hanterar efternamnet
         $lastname = filter_var($lastname, FILTER_SANITIZE_STRING);
+        $lastname = strtolower($lastname);
+        $lastname = ucfirst($lastname);
+
         $email = filter_var($email, FILTER_SANITIZE_EMAIL);
         $phonenr = filter_var($phonenr, FILTER_SANITIZE_NUMBER_INT);
         $personnr = filter_var($personnr, FILTER_SANITIZE_NUMBER_INT);
-
         $password = filter_var($password, FILTER_SANITIZE_STRING);
 
         if(strlen($personnr) < 12 || (strlen($personnr) > 12)) {

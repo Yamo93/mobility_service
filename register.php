@@ -47,27 +47,28 @@
                 <?php if(isset($message)) echo $message; ?>
 
                 <?php if($displayForm) { ?>
-                <form method="post">
+                <form method="post" class="registerform" data-parsley-validate autocomplete="off">
                     <div class="alertbox-permanent">
                         <p>Fälten med stjärna måste fyllas i.</p>
                     </div>
                     <label for="firstname">Förnamn (*)</label>
-                    <input type="text" name="firstname" id="firstname" placeholder="Ange ditt förnamn">
+                    <input type="text" data-validate-field="firstname" name="firstname" id="firstname" placeholder="Ange ditt förnamn" minlength="2">
                     <label for="lastname">Efternamn (*)</label>
-                    <input type="text" name="lastname" id="lastname" placeholder="Ange ditt efternamn">
+                    <input type="text" data-validate-field="lastname" name="lastname" id="lastname" placeholder="Ange ditt efternamn">
                     <label for="email">E-postadress (*)</label>
-                    <input type="email" name="email" id="email" placeholder="Ange din e-postadress">
+                    <input type="email" data-validate-field="email" name="email" id="email" placeholder="Ange din e-postadress">
                     <label for="phonenr">Telefonnummer (*)</label>
-                    <input type="number" name="phonenr" id="phonenr" placeholder="Ange ditt telefonnummer">
+                    <input type="number" data-validate-field="phonenr" name="phonenr" id="phonenr" placeholder="Ange ditt telefonnummer">
                     <label for="personnr">Personnummer (*)</label>
-                    <input type="number" name="personnr" id="personnr" placeholder="YYYYMMDDXXXX">
+                    <input type="number" data-validate-field="personnr" name="personnr" id="personnr" placeholder="YYYYMMDDXXXX">
+                    <p class="fieldnote">Personnumret måste vara exakt <strong>tolv</strong> tecken långt, utan bindestreck.</p>
                     <label for="password">Lösenord (*)</label>
-                    <input type="password" name="password" id="password" placeholder="Ange lösenord">
-                    <p class="fieldnote">Lösenordet måste vara minst <strong>sju</strong> tecken långt.</p>
+                    <input type="password" data-validate-field="password" name="password" id="password" placeholder="Ange lösenord">
+                    <p class="fieldnote">Lösenordet måste vara minst <strong>sju</strong> tecken långt, samt innehålla minst en bokstav och en siffra.</p>
                     <div class="gdpr">
-                        <input type="checkbox" name="confirm" id="gdpr">
-                        <label for="gdpr">Jag godkänner att mina personuppgifter lagras i syfte för registrering och inloggning.</label>
+                        <input type="checkbox" data-validate-field="checkbox" name="confirm" id="gdpr" required>
                     </div>
+                    <label class="gdpr-info" for="gdpr"><strong>Jag godkänner</strong> att mina personuppgifter lagras i syfte för registrering och inloggning.</label>
                     <input type="submit" value="Registrera" id="registerbtn" name="registerbtn">
                 </form>
 
@@ -83,6 +84,7 @@
             </div>
         </section>
     </div>
+    <!-- <script src="just-validate/dist/js/just-validate.min.js"></script> -->
     <script src="js/main.js"></script>
 </body>
 </html>

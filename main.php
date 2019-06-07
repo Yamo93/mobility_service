@@ -360,6 +360,7 @@
     </div>
 
     <script src="js/main.js"></script>
+    <script src="js/nodep-date-input-polyfill.dist.js"></script>
     <script>
         document.querySelector('.navbar').classList.add('main-navbar');
     </script>

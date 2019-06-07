@@ -22,7 +22,7 @@
         }
     } else if (isset($_POST['loginbtn']) && (empty($_POST['personnr']) || empty($_POST['password']))) {
         $message = '<div class="alertbox" role="alert">
-        <p>Användarnamnet eller lösenordet är felaktigt. Vänligen försök igen.</p><span class="closealert">&times;</span>
+        <p>Vänligen fyll i båda fälten.</p><span class="closealert">&times;</span>
           </div>';
     }
 ?>
